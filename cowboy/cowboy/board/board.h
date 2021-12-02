@@ -12,7 +12,7 @@ class board
     static board &get();           //
 
   private:
-    char buffer[];
+    // char buffer[];
 
   public:
     static constexpr u16 WIDTH = 800;

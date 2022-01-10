@@ -139,17 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="board\board.cpp" />
-    <ClCompile Include="console\console.cpp" />
     <ClCompile Include="cowboy.cpp" />
-    <ClCompile Include="entities\player\player.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="board\board.h" />
-    <ClInclude Include="console\console.h" />
-    <ClInclude Include="interfaces\drawable.h" />
-    <ClInclude Include="entities\player\player.h" />
-    <ClInclude Include="typedef.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

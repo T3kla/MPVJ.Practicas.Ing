@@ -4,10 +4,117 @@
     <Filter Include="Files">
       <UniqueIdentifier>{edf9644c-62dd-4a94-913b-ed558b39477e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Files\Engine">
+      <UniqueIdentifier>{f8a0bfe8-4725-41d9-9d9b-8bd8af793e88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\Engine\1 Input">
+      <UniqueIdentifier>{c4275730-72b8-4a9c-8efd-a1db39b6061e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\Engine\2 Game">
+      <UniqueIdentifier>{8de9ee8b-e968-4345-845e-cf9d42682188}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\Engine\3 Rend">
+      <UniqueIdentifier>{16074d36-708c-4fd0-85fe-bd4f51fbc67c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\Engine\4 Time">
+      <UniqueIdentifier>{438dc007-f7e2-4b8d-902a-d0e45b9083f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\Lib">
+      <UniqueIdentifier>{0d2c5624-9d9c-4174-b0a3-742cc98f7eaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\Math">
+      <UniqueIdentifier>{396a52ad-eb0d-4f74-84bc-b08dc98958f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\Rendering">
+      <UniqueIdentifier>{4a8f9133-45fa-4155-b65c-d025e93a62fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\Rendering\Sprites">
+      <UniqueIdentifier>{66a43855-a42d-4c58-afea-04523cd13d82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\Engine\Interfaces">
+      <UniqueIdentifier>{077a733c-5822-4bbb-b4aa-c8b75b13f61f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Files\World">
+      <UniqueIdentifier>{09824036-3fed-463c-9cf9-6ae8c2333b2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cowboy.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Files</Filter>
     </ClCompile>
+    <ClCompile Include="engine.cpp">
+      <Filter>Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="stasis.cpp">
+      <Filter>Files\Engine\4 Time</Filter>
+    </ClCompile>
+    <ClCompile Include="engine_render.cpp">
+      <Filter>Files\Engine\3 Rend</Filter>
+    </ClCompile>
+    <ClCompile Include="engine_input.cpp">
+      <Filter>Files\Engine\1 Input</Filter>
+    </ClCompile>
+    <ClCompile Include="engine_game.cpp">
+      <Filter>Files\Engine\2 Game</Filter>
+    </ClCompile>
+    <ClCompile Include="vec.cpp">
+      <Filter>Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="oval.cpp">
+      <Filter>Files\Rendering\Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="rect.cpp">
+      <Filter>Files\Rendering\Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite.cpp">
+      <Filter>Files\Rendering\Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="world.cpp">
+      <Filter>Files\World</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="engine.h">
+      <Filter>Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="stasis.h">
+      <Filter>Files\Engine\4 Time</Filter>
+    </ClInclude>
+    <ClInclude Include="engine_render.h">
+      <Filter>Files\Engine\3 Rend</Filter>
+    </ClInclude>
+    <ClInclude Include="engine_input.h">
+      <Filter>Files\Engine\1 Input</Filter>
+    </ClInclude>
+    <ClInclude Include="engine_game.h">
+      <Filter>Files\Engine\2 Game</Filter>
+    </ClInclude>
+    <ClInclude Include="pi.h">
+      <Filter>Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="vec.h">
+      <Filter>Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="rect.h">
+      <Filter>Files\Rendering\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="oval.h">
+      <Filter>Files\Rendering\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite.h">
+      <Filter>Files\Rendering\Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="drawable.h">
+      <Filter>Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="color.h">
+      <Filter>Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="gameobject.h">
+      <Filter>Files\Engine\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="world.h">
+      <Filter>Files\World</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

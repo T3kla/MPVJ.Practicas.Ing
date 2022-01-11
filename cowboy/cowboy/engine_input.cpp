@@ -1,6 +1,5 @@
 #include "engine_input.h"
 #include "engine_render.h"
-#include "glfw3.h"
 #include "stasis.h"
 #include "vec.h"
 #include <iostream>

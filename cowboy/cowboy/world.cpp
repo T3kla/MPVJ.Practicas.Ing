@@ -2,6 +2,7 @@
 #include "engine.h"
 #include "engine_game.h"
 #include "engine_input.h"
+#include "engine_render.h"
 #include "stasis.h"
 #include "vec.h"
 
@@ -12,6 +13,7 @@ void World::Awake() {}
 
 void World::Start() {
   EngineRender::SetBgColor({0.1f, 0.1f, 0.1f, 1.f});
+  EngineRender::SetTitleUpdate(true);
   EngineRender::SetTitle(title);
 }
 
@@ -44,8 +46,9 @@ void World::Fixed() {
   // Title
   auto scr2mouse = (mousePos - screenCenter).Magnitude();
   auto rect3ang = rot1.AngleDeg();
-  snprintf(title, TITLE_LEN, "Mouse to center: %.0fpx   Oval at angle: %.0fdeg",
-           scr2mouse, rect3ang);
+  snprintf(title, strlen(title),
+           "Mouse to center: %.0fpx   Oval at angle: %.0fdeg", scr2mouse,
+           rect3ang);
 }
 
 void World::Quit() {}

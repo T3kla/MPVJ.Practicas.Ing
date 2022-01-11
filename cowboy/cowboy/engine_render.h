@@ -4,8 +4,6 @@
 #include "glfw3.h"
 #include <vector>
 
-constexpr size_t TITLE_LEN = 256;
-
 class EngineRender {
   friend class Engine;
 
@@ -35,9 +33,10 @@ public:
 
   // GLFW stuff
 private:
+  bool titleUpdate = false;
   char *title = nullptr;
   GLFWwindow *window = nullptr;
-  int windowWidth = 0, windowHeight = 0;
+  int windowWidth = 1280, windowHeight = 720;
   Color bgColor = {0.f, 0.f, 0.f, 0.f};
 
 public:
@@ -52,4 +51,7 @@ public:
 
   static const char *GetTitle();
   static void SetTitle(char *text);
+
+  static const bool GetTitleUpdate();
+  static void SetTitleUpdate(bool value);
 };

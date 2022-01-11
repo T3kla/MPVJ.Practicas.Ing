@@ -1,13 +1,12 @@
 #pragma once
 
-#include "engine_render.h"
 #include "gameobject.h"
 #include "oval.h"
 #include "rect.h"
 
 class World : public GameObject {
 private:
-  char title[TITLE_LEN] = "Cowboy";
+  char title[256] = "Cowboy";
 
   Rect rect1{{0.f, 0.f}, {75.f, 75.f}, {1.f, 0.f, 0.f, 1.f}};
   Rect rect2{{0.f, 0.f}, {75.f, 75.f}, {0.f, 1.f, 0.f, 1.f}};

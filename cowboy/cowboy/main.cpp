@@ -1,9 +1,6 @@
 #define LITE_GFX_IMPLEMENTATION
 #define STB_IMAGE_IMPLEMENTATION
 
-#include "litegfx.h"
-#include "stb_image.h"
-
 #include "engine.h"
 #include "world.h"
 
@@ -15,7 +12,7 @@
 // constexpr char SPR_BLT_L = '<', SPR_BLT_R = '>';
 // constexpr char SPR_ENEMY_L = '*', SPR_ENEMY_R = '&';
 //
-// constexpr char IN_MOVE_L = 'h', IN_MOVE_R = 'i'; // Esto me duele
+// constexpr char IN_MOVE_L = 'h', IN_MOVE_R = 'i';
 // constexpr char IN_SHOOT_L = 'j', IN_SHOOT_R = 'k';
 // constexpr char IN_EXIT = 27; // Esc
 
@@ -23,6 +20,4 @@ int main() {
   auto world = World();
 
   Engine::Run();
-
-  return 0;
 }

@@ -1,5 +1,8 @@
+// #define LITE_GFX_IMPLEMENTATION
+
 #include "engine_render.h"
 #include "engine.h"
+#include "litegfx.h"
 #include "stasis.h"
 #include "vec.h"
 
@@ -9,11 +12,42 @@ EngineRender::EngineRender() {}
 
 EngineRender &EngineRender::Get() { return instance; }
 
-void EngineRender::Awake() {}
+void OnWindowResize(GLFWwindow *window, int w, int h) {
+  EngineRender::SetWindowSize(w, h);
+  lgfx_setup2d(w, h);
+}
+
+void EngineRender::Awake() {
+  if (glfwInit() == 0)
+    std::cout << "Panic!" << std::endl;
+
+  instance.window = glfwCreateWindow(
+      instance.windowWidth, instance.windowHeight, "", nullptr, nullptr);
+
+  glfwMakeContextCurrent(instance.window);
+
+  glfwSetInputMode(instance.window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+  glfwSetWindowSizeCallback(instance.window, OnWindowResize);
+  lgfx_setup2d(instance.windowWidth, instance.windowHeight);
+}
 
 void EngineRender::Start() {}
 
-void EngineRender::Update() {}
+void EngineRender::Update() {
+  // Render loop
+  lgfx_clearcolorbuffer(instance.bgColor.r, instance.bgColor.g,
+                        instance.bgColor.b);
+
+  for (auto &&drawable : instance.drawables)
+    drawable->Draw();
+
+  glfwSwapBuffers(instance.window);
+
+  // Update title
+  if (instance.titleUpdate)
+    if (instance.title != nullptr)
+      glfwSetWindowTitle(instance.window, instance.title);
+}
 
 void EngineRender::Fixed() {}
 
@@ -66,3 +100,6 @@ void EngineRender::SetTitle(char *text) {
   if (instance.title != nullptr)
     glfwSetWindowTitle(instance.window, instance.title);
 }
+
+const bool EngineRender::GetTitleUpdate() { return instance.titleUpdate; }
+void EngineRender::SetTitleUpdate(bool value) { instance.titleUpdate = value; }

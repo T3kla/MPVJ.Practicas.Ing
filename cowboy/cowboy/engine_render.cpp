@@ -1,5 +1,3 @@
-// #define LITE_GFX_IMPLEMENTATION
-
 #include "engine_render.h"
 #include "engine.h"
 #include "litegfx.h"
@@ -21,9 +19,9 @@ void EngineRender::Awake() {
   if (glfwInit() == 0)
     std::cout << "Panic!" << std::endl;
 
+  // Create window
   instance.window = glfwCreateWindow(
       instance.windowWidth, instance.windowHeight, "", nullptr, nullptr);
-
   glfwMakeContextCurrent(instance.window);
 
   glfwSetInputMode(instance.window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -34,13 +32,11 @@ void EngineRender::Awake() {
 void EngineRender::Start() {}
 
 void EngineRender::Update() {
-  // Render loop
+  // Redraw
   lgfx_clearcolorbuffer(instance.bgColor.r, instance.bgColor.g,
                         instance.bgColor.b);
-
   for (auto &&drawable : instance.drawables)
     drawable->Draw();
-
   glfwSwapBuffers(instance.window);
 
   // Update title

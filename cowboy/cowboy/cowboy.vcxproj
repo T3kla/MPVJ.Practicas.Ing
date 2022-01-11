@@ -49,10 +49,11 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{12C74402-E6BB-4B59-A4A7-43EEAE9E5D6A}</ProjectGuid>
+    <ProjectGuid>{26F19C54-5388-4F8C-9E5D-E706C78321B5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>programacion2d</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>cowboy</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -24,26 +24,24 @@
     <ClCompile Include="engine_input.cpp" />
     <ClCompile Include="engine_render.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="oval.cpp" />
-    <ClCompile Include="rect.cpp" />
-    <ClCompile Include="sprite.cpp" />
     <ClCompile Include="stasis.cpp" />
     <ClCompile Include="vec.cpp" />
     <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="color.h" />
-    <ClInclude Include="drawable.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="engine_game.h" />
     <ClInclude Include="engine_input.h" />
     <ClInclude Include="engine_render.h" />
+    <ClInclude Include="behaviour.h" />
     <ClInclude Include="gameobject.h" />
-    <ClInclude Include="oval.h" />
+    <ClInclude Include="oval_renderer.h" />
     <ClInclude Include="pi.h" />
-    <ClInclude Include="rect.h" />
-    <ClInclude Include="sprite.h" />
+    <ClInclude Include="rect_renderer.h" />
+    <ClInclude Include="sprite_renderer.h" />
     <ClInclude Include="stasis.h" />
+    <ClInclude Include="transform.h" />
     <ClInclude Include="vec.h" />
     <ClInclude Include="world.h" />
   </ItemGroup>

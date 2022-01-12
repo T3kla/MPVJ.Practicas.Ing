@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Source Files\World">
       <UniqueIdentifier>{0415bc7c-a2a3-43d3-ad92-bbe4b1839a96}</UniqueIdentifier>
     </Filter>
@@ -36,8 +32,8 @@
     <Filter Include="Source Files\Rendering">
       <UniqueIdentifier>{d1c4faec-f0ad-4658-8a13-4a395b5a87cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Rendering\Interfaces">
-      <UniqueIdentifier>{4bea3326-042c-47bc-ae90-54c49f8f64d0}</UniqueIdentifier>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{9e18cad6-88bd-4f34-be7c-5266728adb29}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,15 +61,6 @@
     <ClCompile Include="vec.cpp">
       <Filter>Source Files\Math</Filter>
     </ClCompile>
-    <ClCompile Include="oval.cpp">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="rect.cpp">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="sprite.cpp">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.h">
@@ -100,23 +87,26 @@
     <ClInclude Include="world.h">
       <Filter>Source Files\World</Filter>
     </ClInclude>
-    <ClInclude Include="sprite.h">
-      <Filter>Source Files\Rendering</Filter>
+    <ClInclude Include="behaviour.h">
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="oval.h">
-      <Filter>Source Files\Rendering</Filter>
+    <ClInclude Include="transform.h">
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="rect.h">
-      <Filter>Source Files\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="color.h">
-      <Filter>Source Files\Rendering\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="drawable.h">
-      <Filter>Source Files\Rendering\Interfaces</Filter>
+    <ClInclude Include="sprite_renderer.h">
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="gameobject.h">
-      <Filter>Source Files\Engine\2 Game</Filter>
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="color.h">
+      <Filter>Source Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="oval_renderer.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="rect_renderer.h">
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

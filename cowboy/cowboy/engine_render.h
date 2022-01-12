@@ -1,6 +1,6 @@
 #pragma once
 
-#include "drawable.h"
+#include "color.h"
 #include "glfw3.h"
 #include <vector>
 
@@ -22,21 +22,13 @@ private:
   static void Fixed();
   static void Quit();
 
-  // Drawables stuff
-private:
-  std::vector<Drawable *> drawables = std::vector<Drawable *>();
-
-public:
-  static void Subscribe(Drawable *drawable);
-  static void UnSubscribe(const Drawable *drawable);
-  static const std::vector<Drawable *> *GetDrawables();
-
-  // GLFW stuff
 private:
   bool titleUpdate = false;
   char *title = nullptr;
+
   GLFWwindow *window = nullptr;
   int windowWidth = 1280, windowHeight = 720;
+
   Color bgColor = {0.f, 0.f, 0.f, 0.f};
 
 public:

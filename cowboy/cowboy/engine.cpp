@@ -23,16 +23,18 @@ Engine::Engine() {}
 
 Engine &Engine::Get() { return instance; };
 
+entt::registry Engine::reg;
+
 void Engine::Run() {
   Stasis::RefreshTime();
 
   EngineInput::Awake();
-  EngineGame::Awake();
   EngineRender::Awake();
+  EngineGame::Awake();
 
   EngineInput::Start();
-  EngineGame::Start();
   EngineRender::Start();
+  EngineGame::Start();
 
   while (!glfwWindowShouldClose(EngineRender::GetWindow())) {
     Stasis::RefreshTime();
@@ -61,3 +63,5 @@ void Engine::Run() {
 
 float Engine::GetUpdateFPS() { return (float)(1000. / dt); }
 float Engine::GetFixedFPS() { return (float)(1000. / freqFx); }
+
+entt::registry &Engine::GetRegistry() { return instance.reg; }

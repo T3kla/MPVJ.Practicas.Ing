@@ -1,6 +1,6 @@
 #pragma once
 
-#include "gameobject.h"
+#include "behaviour.h"
 #include <vector>
 
 class EngineGame {
@@ -20,10 +20,10 @@ private:
   static void Fixed();
   static void Quit();
 
-  std::vector<GameObject *> each = std::vector<GameObject *>();
+  std::vector<Behaviour *> each = std::vector<Behaviour *>();
 
 public:
-  static void Subscribe(GameObject *gameObject);
-  static void UnSubscribe(const GameObject *gameObject);
-  static const std::vector<GameObject *> *GetGameObjects();
+  static void Subscribe(Behaviour *gameObject);
+  static void UnSubscribe(const Behaviour *gameObject);
+  static const std::vector<Behaviour *> *GetGameObjects();
 };

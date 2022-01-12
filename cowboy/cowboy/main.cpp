@@ -9,6 +9,5 @@
 
 int main() {
   auto world = World();
-
   Engine::Run();
 }

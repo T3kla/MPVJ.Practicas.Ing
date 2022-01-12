@@ -1,7 +1,11 @@
 #include "engine_render.h"
 #include "engine.h"
 #include "litegfx.h"
+#include "oval_renderer.h"
+#include "rect_renderer.h"
+#include "sprite_renderer.h"
 #include "stasis.h"
+#include "transform.h"
 #include "vec.h"
 
 EngineRender EngineRender::instance;
@@ -32,46 +36,53 @@ void EngineRender::Awake() {
 void EngineRender::Start() {}
 
 void EngineRender::Update() {
-  // Redraw
-  lgfx_clearcolorbuffer(instance.bgColor.r, instance.bgColor.g,
-                        instance.bgColor.b);
-  for (auto &&drawable : instance.drawables)
-    drawable->Draw();
-  glfwSwapBuffers(instance.window);
-
   // Update title
   if (instance.titleUpdate)
     if (instance.title != nullptr)
       glfwSetWindowTitle(instance.window, instance.title);
 }
 
-void EngineRender::Fixed() {}
+void EngineRender::Fixed() {
+  // Redraw
+  lgfx_clearcolorbuffer(instance.bgColor.r, instance.bgColor.g,
+                        instance.bgColor.b);
+
+  // Render Rects
+  auto rects = Engine::GetRegistry().view<Transform, RectRenderer>();
+  for (auto [entity, tf, rr] : rects.each()) {
+    lgfx_setcolor(rr.color.r, rr.color.g, rr.color.b, rr.color.a);
+    Vec2 fPos = tf.position + rr.offsetPosition;
+    Vec2 fScl = tf.scale + rr.offsetScale;
+    lgfx_drawrect(fPos.x - fScl.x / 2.f, fPos.y - fScl.y / 2.f, fScl.x, fScl.y);
+  }
+
+  // Render Ovals
+  auto ovals = Engine::GetRegistry().view<Transform, OvalRenderer>();
+  for (auto [entity, tf, rr] : ovals.each()) {
+    lgfx_setcolor(rr.color.r, rr.color.g, rr.color.b, rr.color.a);
+    Vec2 fPos = tf.position + rr.offsetPosition;
+    Vec2 fScl = tf.scale + rr.offsetScale;
+    lgfx_drawoval(fPos.x - fScl.x / 2.f, fPos.y - fScl.y / 2.f, fScl.x, fScl.y);
+  }
+
+  // Render Sprites
+  auto sprites = Engine::GetRegistry().view<Transform, SpriteRenderer>();
+  for (auto [entity, tf, sr] : sprites.each()) {
+    if (!sr.texture)
+      continue;
+    lgfx_setblend(sr.blend);
+    Vec2 fPos = tf.position + sr.offsetPosition;
+    Vec2 fRot = tf.rotation + sr.offsetRotation;
+    ltex_drawrotsized((ltex_t *)sr.texture, fPos.x, fPos.y, sr.offsetRotation,
+                      sr.pivot.x, sr.pivot.y, sr.size.x, sr.size.y, sr.uv0.x,
+                      sr.uv0.y, sr.uv1.x, sr.uv1.y);
+  }
+
+  // Swap Buffers
+  glfwSwapBuffers(instance.window);
+}
 
 void EngineRender::Quit() {}
-
-void EngineRender::Subscribe(Drawable *drawable) {
-  // Duplication guard
-  auto it =
-      std::find(instance.drawables.begin(), instance.drawables.end(), drawable);
-  if (it != instance.drawables.end())
-    return;
-
-  instance.drawables.emplace_back(drawable);
-}
-
-void EngineRender::UnSubscribe(const Drawable *drawable) {
-  // Not found guard
-  auto it =
-      std::find(instance.drawables.begin(), instance.drawables.end(), drawable);
-  if (it == instance.drawables.end())
-    return;
-
-  instance.drawables.erase(it);
-}
-
-const std::vector<Drawable *> *EngineRender::GetDrawables() {
-  return &instance.drawables;
-}
 
 GLFWwindow *EngineRender::GetWindow() { return instance.window; }
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "camera.h"
 #include "color.h"
 #include "glfw3.h"
 #include <vector>

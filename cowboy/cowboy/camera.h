@@ -2,9 +2,10 @@
 
 class Entity;
 
-struct GameObject {
+struct Camera {
   Entity *entity = nullptr;
   bool enable = true;
 
-  bool isActive = false;
+  bool main = false;
+  float height = 1.f;
 };

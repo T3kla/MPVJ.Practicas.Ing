@@ -5,6 +5,9 @@
 class EngineInput {
   friend class Engine;
 
+public:
+  enum class KeyCode { None, Default, W, A, S, D, Q, E };
+
 private:                                     // SINGLETON
   EngineInput();                             //
   static EngineInput instance;               //
@@ -26,4 +29,6 @@ private:
 public:
   static Vec2 GetMousePos();
   static Vec2 GetMouseDelta();
+
+  static unsigned char GetKey(KeyCode key);
 };

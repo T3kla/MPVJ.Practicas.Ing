@@ -3,7 +3,12 @@
 #include "litegfx.h"
 #include "vec.h"
 
+class Entity;
+
 struct SpriteRenderer {
+  Entity *entity = nullptr;
+  bool enable = true;
+
   void *texture = nullptr;
 
   Vec2 offsetPosition = {0.f, 0.f};

@@ -23,27 +23,32 @@
     <ClCompile Include="engine_game.cpp" />
     <ClCompile Include="engine_input.cpp" />
     <ClCompile Include="engine_render.cpp" />
+    <ClCompile Include="entity.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="player_controller.cpp" />
+    <ClCompile Include="scene.cpp" />
     <ClCompile Include="stasis.cpp" />
     <ClCompile Include="vec.cpp" />
-    <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="engine_game.h" />
     <ClInclude Include="engine_input.h" />
     <ClInclude Include="engine_render.h" />
     <ClInclude Include="behaviour.h" />
+    <ClInclude Include="entity.h" />
     <ClInclude Include="gameobject.h" />
     <ClInclude Include="oval_renderer.h" />
     <ClInclude Include="pi.h" />
+    <ClInclude Include="player_controller.h" />
     <ClInclude Include="rect_renderer.h" />
+    <ClInclude Include="scene.h" />
     <ClInclude Include="sprite_renderer.h" />
     <ClInclude Include="stasis.h" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="vec.h" />
-    <ClInclude Include="world.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

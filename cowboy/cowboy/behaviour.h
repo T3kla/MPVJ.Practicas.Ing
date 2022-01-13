@@ -1,6 +1,11 @@
 #pragma once
 
+class Entity;
+
 struct Behaviour {
+  Entity *entity = nullptr;
+  bool enable = true;
+
   virtual void Awake() = 0;
   virtual void Start() = 0;
   virtual void Update() = 0;

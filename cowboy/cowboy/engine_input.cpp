@@ -36,3 +36,24 @@ void EngineInput::Quit() {}
 
 Vec2 EngineInput::GetMousePos() { return instance.mousePos; }
 Vec2 EngineInput::GetMouseDelta() { return instance.mouseDelta; }
+
+unsigned char EngineInput::GetKey(KeyCode key) {
+  auto *window = EngineRender::GetWindow();
+
+  switch (key) {
+  case EngineInput::KeyCode::W:
+    return glfwGetKey(window, GLFW_KEY_W);
+  case EngineInput::KeyCode::A:
+    return glfwGetKey(window, GLFW_KEY_A);
+  case EngineInput::KeyCode::S:
+    return glfwGetKey(window, GLFW_KEY_S);
+  case EngineInput::KeyCode::D:
+    return glfwGetKey(window, GLFW_KEY_D);
+  case EngineInput::KeyCode::Q:
+    return glfwGetKey(window, GLFW_KEY_Q);
+  case EngineInput::KeyCode::E:
+    return glfwGetKey(window, GLFW_KEY_E);
+  default:
+    return 0;
+  }
+}

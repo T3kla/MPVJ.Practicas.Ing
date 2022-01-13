@@ -1,5 +1,6 @@
 #include "engine_render.h"
 #include "engine.h"
+#include "entity.h"
 #include "litegfx.h"
 #include "oval_renderer.h"
 #include "rect_renderer.h"
@@ -47,12 +48,29 @@ void EngineRender::Fixed() {
   lgfx_clearcolorbuffer(instance.bgColor.r, instance.bgColor.g,
                         instance.bgColor.b);
 
+  // Camera settings
+  Vec2 camPos = {0.f, 0.f};
+  float camHeight = 1.f;
+  auto cams = Engine::GetRegistry().view<Transform, Camera>();
+  for (auto [entity, tf, cm] : cams.each())
+    if (cm.main) {
+      camPos = tf.position;
+      camHeight = cm.height;
+    }
+
+  auto CamTreatment = [&](Vec2 &pos, Vec2 &scl) {
+    pos /= camHeight;
+    scl /= camHeight;
+    pos -= camPos;
+  };
+
   // Render Rects
   auto rects = Engine::GetRegistry().view<Transform, RectRenderer>();
   for (auto [entity, tf, rr] : rects.each()) {
     lgfx_setcolor(rr.color.r, rr.color.g, rr.color.b, rr.color.a);
     Vec2 fPos = tf.position + rr.offsetPosition;
     Vec2 fScl = tf.scale + rr.offsetScale;
+    CamTreatment(fPos, fScl);
     lgfx_drawrect(fPos.x - fScl.x / 2.f, fPos.y - fScl.y / 2.f, fScl.x, fScl.y);
   }
 
@@ -62,6 +80,7 @@ void EngineRender::Fixed() {
     lgfx_setcolor(rr.color.r, rr.color.g, rr.color.b, rr.color.a);
     Vec2 fPos = tf.position + rr.offsetPosition;
     Vec2 fScl = tf.scale + rr.offsetScale;
+    CamTreatment(fPos, fScl);
     lgfx_drawoval(fPos.x - fScl.x / 2.f, fPos.y - fScl.y / 2.f, fScl.x, fScl.y);
   }
 
@@ -73,8 +92,10 @@ void EngineRender::Fixed() {
     lgfx_setblend(sr.blend);
     Vec2 fPos = tf.position + sr.offsetPosition;
     Vec2 fRot = tf.rotation + sr.offsetRotation;
+    Vec2 fScl = sr.size;
+    CamTreatment(fPos, fScl);
     ltex_drawrotsized((ltex_t *)sr.texture, fPos.x, fPos.y, sr.offsetRotation,
-                      sr.pivot.x, sr.pivot.y, sr.size.x, sr.size.y, sr.uv0.x,
+                      sr.pivot.x, sr.pivot.y, fScl.x, fScl.y, sr.uv0.x,
                       sr.uv0.y, sr.uv1.x, sr.uv1.y);
   }
 

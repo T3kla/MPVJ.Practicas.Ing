@@ -5,9 +5,9 @@
 #include "stb_image.h"
 
 #include "engine.h"
-#include "world.h"
+#include "scene.h"
 
 int main() {
-  auto world = World();
+  auto scene01 = Scene();
   Engine::Run();
 }

@@ -29,6 +29,7 @@ private:
 public:
   static Vec2 GetMousePos();
   static Vec2 GetMouseDelta();
+  static Vec2 GetMousePosInWorld();
 
   static unsigned char GetKey(KeyCode key);
 };

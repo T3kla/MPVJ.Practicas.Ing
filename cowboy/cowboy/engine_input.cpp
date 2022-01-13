@@ -1,6 +1,8 @@
 #include "engine_input.h"
 #include "engine_render.h"
+#include "entity.h"
 #include "stasis.h"
+#include "transform.h"
 #include "vec.h"
 #include <iostream>
 
@@ -36,6 +38,15 @@ void EngineInput::Quit() {}
 
 Vec2 EngineInput::GetMousePos() { return instance.mousePos; }
 Vec2 EngineInput::GetMouseDelta() { return instance.mouseDelta; }
+Vec2 EngineInput::GetMousePosInWorld() {
+  auto *cam = EngineRender::GetMainCamera();
+
+  if (!cam)
+    return {0.f, 0.f};
+
+  auto &tf = cam->entity->GetReg()->get<Transform>(cam->entity->GetID());
+  return tf.position + instance.mousePos;
+}
 
 unsigned char EngineInput::GetKey(KeyCode key) {
   auto *window = EngineRender::GetWindow();

@@ -16,8 +16,8 @@
 
 #include <entt/entt.hpp>
 
-Scene::Scene() { EngineGame::Subscribe(this); }
-Scene::~Scene() { EngineGame::UnSubscribe(this); }
+Scene::Scene() {}
+Scene::~Scene() {}
 
 void Scene::Awake() {
   EngineRender::SetTitle(title);
@@ -33,6 +33,18 @@ void Scene::Awake() {
                             Vec2(100.f, 50.f), Color(1.f, 0.f, 0.f, 1.f));
   reg.emplace<Camera>(playerEntID, &player, true, true, 1.f);
   // reg.emplace<Behaviour>(playerEntID, &player, true);
+
+  auto pc = new PlayerController();
+  pc->entity = &player;
+  pc->enable = true;
+
+  // Palo Random
+  const auto paloID = reg.create();
+  floor[0] = Entity(paloID, &reg);
+  reg.emplace<Transform>(paloID, &player, true, Vec2(200.f, 200.f),
+                         Vec2(1.f, 1.f), 0.f);
+  reg.emplace<OvalRenderer>(paloID, &player, true, Vec2(0.f, 0.f),
+                            Vec2(100.f, 50.f), Color(1.f, 0.f, 0.f, 1.f));
 }
 
 void Scene::Start() {}

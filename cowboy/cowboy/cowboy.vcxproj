@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="behaviour.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="engine_game.cpp" />
     <ClCompile Include="engine_input.cpp" />
@@ -27,6 +28,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player_controller.cpp" />
     <ClCompile Include="scene.cpp" />
+    <ClCompile Include="sprite_loader.cpp" />
     <ClCompile Include="stasis.cpp" />
     <ClCompile Include="vec.cpp" />
   </ItemGroup>
@@ -45,6 +47,7 @@
     <ClInclude Include="player_controller.h" />
     <ClInclude Include="rect_renderer.h" />
     <ClInclude Include="scene.h" />
+    <ClInclude Include="sprite_loader.h" />
     <ClInclude Include="sprite_renderer.h" />
     <ClInclude Include="stasis.h" />
     <ClInclude Include="transform.h" />

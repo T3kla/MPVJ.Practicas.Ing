@@ -47,4 +47,6 @@ public:
 
   static const bool GetTitleUpdate();
   static void SetTitleUpdate(bool value);
+
+  static const Camera *GetMainCamera();
 };

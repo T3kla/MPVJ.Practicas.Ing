@@ -49,12 +49,12 @@ void EngineRender::Fixed() {
                         instance.bgColor.b);
 
   // Camera settings
-  Vec2 camPos = {0.f, 0.f};
+  Vec2 camPos = {-instance.windowWidth / 2.f, -instance.windowHeight / 2.f};
   float camHeight = 1.f;
   auto cams = Engine::GetRegistry().view<Transform, Camera>();
   for (auto [entity, tf, cm] : cams.each())
     if (cm.main) {
-      camPos = tf.position;
+      camPos += tf.position;
       camHeight = cm.height;
     }
 
@@ -131,3 +131,13 @@ void EngineRender::SetTitle(char *text) {
 
 const bool EngineRender::GetTitleUpdate() { return instance.titleUpdate; }
 void EngineRender::SetTitleUpdate(bool value) { instance.titleUpdate = value; }
+
+const Camera *EngineRender::GetMainCamera() {
+  auto cams = Engine::GetRegistry().view<Transform, Camera>();
+
+  for (auto [entity, tf, cm] : cams.each())
+    if (cm.main)
+      return &cm;
+
+  return nullptr;
+}

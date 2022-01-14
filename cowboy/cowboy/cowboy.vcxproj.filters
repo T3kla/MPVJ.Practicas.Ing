@@ -44,6 +44,9 @@
     <Filter Include="Source Files\ECS\Behaviour">
       <UniqueIdentifier>{fd27c85e-a075-41e0-8d0b-a67c0a863ef5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ECS\Systems">
+      <UniqueIdentifier>{1c5211fc-09d3-4fba-819d-5f829f72b59c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -73,14 +76,23 @@
     <ClCompile Include="scene.cpp">
       <Filter>Source Files\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="player_controller.cpp">
-      <Filter>Source Files\ECS\Behaviour</Filter>
-    </ClCompile>
     <ClCompile Include="behaviour.cpp">
       <Filter>Source Files\ECS\Behaviour</Filter>
     </ClCompile>
     <ClCompile Include="sprite_loader.cpp">
       <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="sys_player.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="sys_bullet.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="sys_enemy.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="sys_physics.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,9 +144,6 @@
     <ClInclude Include="scene.h">
       <Filter>Source Files\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="player_controller.h">
-      <Filter>Source Files\ECS\Behaviour</Filter>
-    </ClInclude>
     <ClInclude Include="behaviour.h">
       <Filter>Source Files\ECS\Behaviour</Filter>
     </ClInclude>
@@ -143,6 +152,27 @@
     </ClInclude>
     <ClInclude Include="sprite.h">
       <Filter>Source Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="sys_player.h">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="sys_enemy.h">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="sys_bullet.h">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.h">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="sys_physics.h">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="collider.h">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="rigidbody.h">
+      <Filter>Source Files\ECS\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

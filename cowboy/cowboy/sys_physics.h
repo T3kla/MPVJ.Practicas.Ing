@@ -2,11 +2,9 @@
 
 #include "behaviour.h"
 
-struct PlayerController : public Behaviour {
-  float speed = 200.f;
-
-  PlayerController();
-  virtual ~PlayerController() override;
+struct SysPhysics : public Behaviour {
+  SysPhysics();
+  virtual ~SysPhysics() override;
 
   virtual void Awake() override;
   virtual void Start() override;

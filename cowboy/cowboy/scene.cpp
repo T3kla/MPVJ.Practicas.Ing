@@ -8,9 +8,9 @@
 #include "stasis.h"
 
 #include "oval_renderer.h"
-#include "player_controller.h"
 #include "rect_renderer.h"
 #include "sprite_renderer.h"
+#include "sys_player.h"
 #include "transform.h"
 
 #include "vec.h"
@@ -35,7 +35,7 @@ void Scene::Awake() {
       -90.f, Vec2(100.f, 100.f), Vec2(0.5f, 0.5f), 0, BLEND_ALPHA);
   reg.emplace<Camera>(playerEntID, &player, true, true, 1.f);
 
-  auto pc = new PlayerController();
+  auto pc = new SysPlayer();
   pc->entity = &player;
   pc->enable = true;
 

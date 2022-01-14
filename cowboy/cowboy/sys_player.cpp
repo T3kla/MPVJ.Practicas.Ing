@@ -1,4 +1,4 @@
-#include "player_controller.h"
+#include "sys_player.h"
 
 #include "engine.h"
 #include "engine_game.h"
@@ -8,44 +8,40 @@
 #include "transform.h"
 #include "vec.h"
 
-PlayerController::PlayerController() {}
-PlayerController::~PlayerController() {}
+SysPlayer::SysPlayer() {}
+SysPlayer::~SysPlayer() {}
 
-void PlayerController::Awake() {}
+void SysPlayer::Awake() {}
 
-void PlayerController::Start() {}
+void SysPlayer::Start() {}
 
-void PlayerController::Update() {
+void SysPlayer::Update() {
   if (!entity)
     return;
 
   // Input
-  if (EngineInput::GetKey(EngineInput::KeyCode::W)) {
+  if (EngineInput::GetKey(EngineInput::KeyCode::W))
     Engine::GetRegistry().get<Transform>(entity->GetID()).position.y -=
         speed * (float)Stasis::GetDeltaScaled() * 0.001f;
-  }
 
-  if (EngineInput::GetKey(EngineInput::KeyCode::S)) {
+  if (EngineInput::GetKey(EngineInput::KeyCode::S))
     Engine::GetRegistry().get<Transform>(entity->GetID()).position.y +=
         speed * (float)Stasis::GetDeltaScaled() * 0.001f;
-  }
 
-  if (EngineInput::GetKey(EngineInput::KeyCode::A)) {
+  if (EngineInput::GetKey(EngineInput::KeyCode::A))
     Engine::GetRegistry().get<Transform>(entity->GetID()).position.x -=
         speed * (float)Stasis::GetDeltaScaled() * 0.001f;
-  }
 
-  if (EngineInput::GetKey(EngineInput::KeyCode::D)) {
+  if (EngineInput::GetKey(EngineInput::KeyCode::D))
     Engine::GetRegistry().get<Transform>(entity->GetID()).position.x +=
         speed * (float)Stasis::GetDeltaScaled() * 0.001f;
-  }
 
-  // Look to mouse TODO: test with sprite
+  // Look to mouse
   auto &tf = entity->GetReg()->get<Transform>(entity->GetID());
   auto ang = (EngineInput::GetMousePosInWorld() - tf.position).AngleDeg();
   tf.rotation = ang;
 }
 
-void PlayerController::Fixed() {}
+void SysPlayer::Fixed() {}
 
-void PlayerController::Quit() {}
+void SysPlayer::Quit() {}

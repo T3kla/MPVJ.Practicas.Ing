@@ -26,13 +26,17 @@
     <ClCompile Include="engine_render.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="player_controller.cpp" />
+    <ClCompile Include="sys_bullet.cpp" />
+    <ClCompile Include="sys_enemy.cpp" />
+    <ClCompile Include="sys_physics.cpp" />
+    <ClCompile Include="sys_player.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="sprite_loader.cpp" />
     <ClCompile Include="stasis.cpp" />
     <ClCompile Include="vec.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bullet.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="engine.h" />
@@ -42,9 +46,14 @@
     <ClInclude Include="behaviour.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="gameobject.h" />
+    <ClInclude Include="collider.h" />
     <ClInclude Include="oval_renderer.h" />
     <ClInclude Include="pi.h" />
-    <ClInclude Include="player_controller.h" />
+    <ClInclude Include="rigidbody.h" />
+    <ClInclude Include="sys_bullet.h" />
+    <ClInclude Include="sys_enemy.h" />
+    <ClInclude Include="sys_physics.h" />
+    <ClInclude Include="sys_player.h" />
     <ClInclude Include="rect_renderer.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="sprite.h" />

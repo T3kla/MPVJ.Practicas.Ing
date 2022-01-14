@@ -38,6 +38,7 @@
   <ItemGroup>
     <ClInclude Include="bullet.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="collision_behaviour.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="engine.h" />
     <ClInclude Include="engine_game.h" />
@@ -49,6 +50,7 @@
     <ClInclude Include="collider.h" />
     <ClInclude Include="oval_renderer.h" />
     <ClInclude Include="pi.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="rigidbody.h" />
     <ClInclude Include="sys_bullet.h" />
     <ClInclude Include="sys_enemy.h" />

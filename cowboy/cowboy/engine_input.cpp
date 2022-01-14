@@ -66,6 +66,12 @@ unsigned char EngineInput::GetKey(KeyCode key) {
     return glfwGetKey(window, GLFW_KEY_Q);
   case EngineInput::KeyCode::E:
     return glfwGetKey(window, GLFW_KEY_E);
+  case EngineInput::KeyCode::Mouse1:
+    return glfwGetKey(window, GLFW_MOUSE_BUTTON_1);
+  case EngineInput::KeyCode::Mouse2:
+    return glfwGetKey(window, GLFW_MOUSE_BUTTON_2);
+  case EngineInput::KeyCode::Mouse3:
+    return glfwGetKey(window, GLFW_MOUSE_BUTTON_3);
   default:
     return 0;
   }

@@ -4,6 +4,8 @@
 #include "engine_game.h"
 #include "engine_input.h"
 #include "entity.h"
+#include "player.h"
+#include "rigidbody.h"
 #include "stasis.h"
 #include "transform.h"
 #include "vec.h"
@@ -16,30 +18,53 @@ void SysPlayer::Awake() {}
 void SysPlayer::Start() {}
 
 void SysPlayer::Update() {
-  if (!entity)
+  Transform *ptrTF = nullptr;
+  Rigidbody *ptrRB = nullptr;
+  Player *ptrPL = nullptr;
+
+  auto players = Engine::GetRegistry().view<Transform, Rigidbody, Player>();
+
+  for (auto [entity, tf, rb, pl] : players.each()) {
+    ptrTF = &tf;
+    ptrRB = &rb;
+    ptrPL = &pl;
+    break;
+  }
+
+  if (!ptrPL)
     return;
 
-  // Input
+  // Look towards mouse
+  auto ang = (EngineInput::GetMousePosInWorld() - ptrTF->position).AngleDeg();
+  ptrTF->rotation = ang;
+
+  // Movement
+  Vec2 vel = ptrRB->velocity;
+  Vec2 add = {0.f, 0.f};
+
   if (EngineInput::GetKey(EngineInput::KeyCode::W))
-    Engine::GetRegistry().get<Transform>(entity->GetID()).position.y -=
-        speed * (float)Stasis::GetDeltaScaled() * 0.001f;
-
+    add.y--;
   if (EngineInput::GetKey(EngineInput::KeyCode::S))
-    Engine::GetRegistry().get<Transform>(entity->GetID()).position.y +=
-        speed * (float)Stasis::GetDeltaScaled() * 0.001f;
-
+    add.y++;
   if (EngineInput::GetKey(EngineInput::KeyCode::A))
-    Engine::GetRegistry().get<Transform>(entity->GetID()).position.x -=
-        speed * (float)Stasis::GetDeltaScaled() * 0.001f;
-
+    add.x++;
   if (EngineInput::GetKey(EngineInput::KeyCode::D))
-    Engine::GetRegistry().get<Transform>(entity->GetID()).position.x +=
-        speed * (float)Stasis::GetDeltaScaled() * 0.001f;
+    add.x--;
 
-  // Look to mouse
-  auto &tf = entity->GetReg()->get<Transform>(entity->GetID());
-  auto ang = (EngineInput::GetMousePosInWorld() - tf.position).AngleDeg();
-  tf.rotation = ang;
+  vel += (add.Normalized() * ptrPL->maxSpeed) / ptrPL->acceleration;
+
+  // Shooting TODO: shoot
+  // if (EngineInput::GetKey(EngineInput::KeyCode::Mouse1))
+  //  add.x--;
+
+  // auto players = Engine::GetRegistry().view<Transform, Rigidbody, Player>();
+
+  // for (auto [entity, tf, rb, pl] : players.each()) {
+  //   ptrTF = &tf;
+  //   ptrRB = &rb;
+  //   ptrPL = &pl;
+  //   break;
+  // }
 }
 
 void SysPlayer::Fixed() {}

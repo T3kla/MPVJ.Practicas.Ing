@@ -36,10 +36,8 @@ void Scene::Awake() {
   reg.emplace<Camera>(playerEntID, &player, true, true, 1.f);
 
   auto pc = new SysPlayer();
-  pc->entity = &player;
-  pc->enable = true;
 
-  // Suelo Random
+  // Suelo Random TODO: create around player?
   const auto floorID = reg.create();
   floor[0] = Entity(floorID, &reg);
   reg.emplace<Transform>(floorID, &floor[0], true, Vec2(0.f, 0.f),
@@ -47,6 +45,8 @@ void Scene::Awake() {
   reg.emplace<SpriteRenderer>(
       floorID, &floor[0], true, &SpriteLoader::sprFloor01, Vec2(0.f, 0.f), 0.f,
       Vec2(100.f, 100.f), Vec2(0.5f, 0.5f), 0, BLEND_SOLID);
+
+  // Bullets TODO: pool bullets
 }
 
 void Scene::Start() {}

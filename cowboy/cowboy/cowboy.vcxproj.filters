@@ -47,6 +47,9 @@
     <Filter Include="Source Files\ECS\Systems">
       <UniqueIdentifier>{1c5211fc-09d3-4fba-819d-5f829f72b59c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{7b94a7b8-fbc6-4371-ab71-d32a942bfc52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -172,6 +175,12 @@
       <Filter>Source Files\ECS\Components</Filter>
     </ClInclude>
     <ClInclude Include="rigidbody.h">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="collision_behaviour.h">
+      <Filter>Source Files\ECS\Behaviour</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
       <Filter>Source Files\ECS\Components</Filter>
     </ClInclude>
   </ItemGroup>

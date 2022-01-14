@@ -4,19 +4,18 @@
 #include "vec.h"
 
 class Entity;
+struct Sprite;
 
 struct SpriteRenderer {
   Entity *entity = nullptr;
   bool enable = true;
 
-  void *texture = nullptr;
+  Sprite *sprite = nullptr;
 
   Vec2 offsetPosition = {0.f, 0.f};
   float offsetRotation = 0.f;
 
   Vec2 size = {100.f, 100.f};
-  Vec2 uv0 = {0.f, 0.f};
-  Vec2 uv1 = {1.f, 1.f};
   Vec2 pivot = {0.5f, 0.5f};
   int layer = 0;
 

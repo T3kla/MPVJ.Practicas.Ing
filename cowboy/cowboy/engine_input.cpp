@@ -44,8 +44,10 @@ Vec2 EngineInput::GetMousePosInWorld() {
   if (!cam)
     return {0.f, 0.f};
 
+  int x, y;
   auto &tf = cam->entity->GetReg()->get<Transform>(cam->entity->GetID());
-  return tf.position + instance.mousePos;
+  EngineRender::GetWindowSize(x, y);
+  return tf.position + instance.mousePos - Vec2(x, y) / 2.f;
 }
 
 unsigned char EngineInput::GetKey(KeyCode key) {

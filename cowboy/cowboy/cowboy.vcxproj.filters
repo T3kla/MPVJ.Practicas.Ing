@@ -141,5 +141,8 @@
     <ClInclude Include="sprite_loader.h">
       <Filter>Source Files\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="sprite.h">
+      <Filter>Source Files\Rendering</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

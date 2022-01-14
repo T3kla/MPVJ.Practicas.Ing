@@ -3,7 +3,7 @@
 #include "behaviour.h"
 
 struct PlayerController : public Behaviour {
-  float speed = 100.f;
+  float speed = 200.f;
 
   PlayerController();
   virtual ~PlayerController() override;

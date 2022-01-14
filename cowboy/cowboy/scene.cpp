@@ -4,6 +4,7 @@
 #include "engine_game.h"
 #include "engine_input.h"
 #include "engine_render.h"
+#include "sprite_loader.h"
 #include "stasis.h"
 
 #include "oval_renderer.h"
@@ -29,22 +30,23 @@ void Scene::Awake() {
   player = Entity(playerEntID, &reg);
   reg.emplace<Transform>(playerEntID, &player, true, Vec2(100.f, 100.f),
                          Vec2(1.f, 1.f), 0.f);
-  reg.emplace<RectRenderer>(playerEntID, &player, true, Vec2(0.f, 0.f),
-                            Vec2(100.f, 50.f), Color(1.f, 0.f, 0.f, 1.f));
+  reg.emplace<SpriteRenderer>(
+      playerEntID, &player, true, &SpriteLoader::sprPlayer, Vec2(0.f, 0.f),
+      -90.f, Vec2(100.f, 100.f), Vec2(0.5f, 0.5f), 0, BLEND_ALPHA);
   reg.emplace<Camera>(playerEntID, &player, true, true, 1.f);
-  // reg.emplace<Behaviour>(playerEntID, &player, true);
 
   auto pc = new PlayerController();
   pc->entity = &player;
   pc->enable = true;
 
-  // Palo Random
-  const auto paloID = reg.create();
-  floor[0] = Entity(paloID, &reg);
-  reg.emplace<Transform>(paloID, &player, true, Vec2(200.f, 200.f),
+  // Suelo Random
+  const auto floorID = reg.create();
+  floor[0] = Entity(floorID, &reg);
+  reg.emplace<Transform>(floorID, &floor[0], true, Vec2(0.f, 0.f),
                          Vec2(1.f, 1.f), 0.f);
-  reg.emplace<OvalRenderer>(paloID, &player, true, Vec2(0.f, 0.f),
-                            Vec2(100.f, 50.f), Color(1.f, 0.f, 0.f, 1.f));
+  reg.emplace<SpriteRenderer>(
+      floorID, &floor[0], true, &SpriteLoader::sprFloor01, Vec2(0.f, 0.f), 0.f,
+      Vec2(100.f, 100.f), Vec2(0.5f, 0.5f), 0, BLEND_SOLID);
 }
 
 void Scene::Start() {}

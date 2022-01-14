@@ -30,7 +30,7 @@ private:
   GLFWwindow *window = nullptr;
   int windowWidth = 1280, windowHeight = 720;
 
-  Color bgColor = {0.f, 0.f, 0.f, 0.f};
+  Color bgColor = {0.f, 0.f, 0.f, 1.f};
 
 public:
   static GLFWwindow *GetWindow();

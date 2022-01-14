@@ -47,6 +47,7 @@
     <ClInclude Include="player_controller.h" />
     <ClInclude Include="rect_renderer.h" />
     <ClInclude Include="scene.h" />
+    <ClInclude Include="sprite.h" />
     <ClInclude Include="sprite_loader.h" />
     <ClInclude Include="sprite_renderer.h" />
     <ClInclude Include="stasis.h" />

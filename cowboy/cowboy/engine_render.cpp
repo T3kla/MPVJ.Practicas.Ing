@@ -4,6 +4,8 @@
 #include "litegfx.h"
 #include "oval_renderer.h"
 #include "rect_renderer.h"
+#include "sprite.h"
+#include "sprite_loader.h"
 #include "sprite_renderer.h"
 #include "stasis.h"
 #include "transform.h"
@@ -34,7 +36,7 @@ void EngineRender::Awake() {
   lgfx_setup2d(instance.windowWidth, instance.windowHeight);
 }
 
-void EngineRender::Start() {}
+void EngineRender::Start() { SpriteLoader::LoadSprites(); }
 
 void EngineRender::Update() {
   // Update title
@@ -85,18 +87,19 @@ void EngineRender::Fixed() {
   }
 
   // Render Sprites
+  lgfx_setcolor(1.f, 1.f, 1.f, 1.f);
   auto sprites = Engine::GetRegistry().view<Transform, SpriteRenderer>();
   for (auto [entity, tf, sr] : sprites.each()) {
-    if (!sr.texture)
+    if (!sr.sprite)
       continue;
-    lgfx_setblend(sr.blend);
     Vec2 fPos = tf.position + sr.offsetPosition;
-    Vec2 fRot = tf.rotation + sr.offsetRotation;
     Vec2 fScl = sr.size;
+    float fRot = tf.rotation + sr.offsetRotation;
     CamTreatment(fPos, fScl);
-    ltex_drawrotsized((ltex_t *)sr.texture, fPos.x, fPos.y, sr.offsetRotation,
-                      sr.pivot.x, sr.pivot.y, fScl.x, fScl.y, sr.uv0.x,
-                      sr.uv0.y, sr.uv1.x, sr.uv1.y);
+    lgfx_setblend(sr.blend);
+    ltex_drawrotsized((ltex_t *)sr.sprite->texture, fPos.x, fPos.y, fRot,
+                      sr.pivot.x, sr.pivot.y, fScl.x, fScl.y, sr.sprite->uv0.x,
+                      sr.sprite->uv0.y, sr.sprite->uv1.x, sr.sprite->uv1.y);
   }
 
   // Swap Buffers

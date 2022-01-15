@@ -104,7 +104,13 @@ float Vec2::Magnitude() const { return sqrt(x * x + y * y); }
 
 float Vec2::MagnitudeSq() const { return x * x + y * y; }
 
-Vec2 Vec2::Normalized() const { return *this / this->Magnitude(); }
+Vec2 Vec2::Normalized() const {
+  auto mag = this->Magnitude();
+  if (mag != 0.f)
+    return *this / this->Magnitude();
+  else
+    return Zero();
+}
 
 float Vec2::AngleDeg() const {
   auto result = ToDeg(Vec2::Angle(*this, f2Right));
@@ -205,7 +211,7 @@ Vec2i &Vec2i::operator-=(const Vec2i &_rhs) {
   return *this;
 }
 
-Vec2i &Vec2i::operator*=(const int&_rhs) {
+Vec2i &Vec2i::operator*=(const int &_rhs) {
   this->x *= _rhs;
   this->y *= _rhs;
   return *this;

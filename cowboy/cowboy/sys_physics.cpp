@@ -19,11 +19,19 @@ void SysPhysics::Start() {}
 void SysPhysics::Update() {}
 
 void SysPhysics::Fixed() {
-  auto bullets = Engine::GetRegistry().view<Transform, Rigidbody, Collider>();
+  // Movement
+  auto movers = Engine::GetRegistry().view<Transform, Rigidbody>();
 
-  for (auto [entity, tf0, rb0, cl0] : bullets.each()) {
-    tf0.position += rb0.velocity * (float)STP * 0.001f;
-    rb0.velocity = rb0.velocity / rb0.linearDamp;
+  for (auto [entity, tf, rb] : movers.each()) {
+    tf.position += rb.velocity * (float)STP * 0.001f;
+    rb.velocity = rb.velocity * (1.f - rb.linearDamp);
+  }
+
+  // Collision
+  auto collisioners =
+      Engine::GetRegistry().view<Transform, Rigidbody, Collider>();
+
+  for (auto [entity, tf0, rb0, cl0] : collisioners.each()) {
 
     auto xTop0 = tf0.position.x + cl0.size.x / 2.f;
     auto xBot0 = tf0.position.x - cl0.size.x / 2.f;
@@ -34,7 +42,7 @@ void SysPhysics::Fixed() {
       return v > t ? false : v < b ? false : true;
     };
 
-    for (auto [entity, tf1, rb1, cl1] : bullets.each()) {
+    for (auto [entity, tf1, rb1, cl1] : collisioners.each()) {
 
       auto sqr = Collider::Type::Square;
       auto crl = Collider::Type::Square;

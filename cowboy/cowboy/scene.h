@@ -8,10 +8,6 @@ class Scene : public Behaviour {
 private:
   char title[256] = "Cowboy";
 
-  Entity player;
-  Entity enemies[64];
-  Entity floor[64];
-
 public:
   Scene();
   ~Scene();

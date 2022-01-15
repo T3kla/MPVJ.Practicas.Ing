@@ -39,15 +39,16 @@ void EngineInput::Quit() {}
 Vec2 EngineInput::GetMousePos() { return instance.mousePos; }
 Vec2 EngineInput::GetMouseDelta() { return instance.mouseDelta; }
 Vec2 EngineInput::GetMousePosInWorld() {
-  auto *cam = EngineRender::GetMainCamera();
+  Transform *tf = nullptr;
+  Camera *cm = nullptr;
+  EngineRender::GetMainCamera(tf, cm);
 
-  if (!cam)
+  if (!cm)
     return {0.f, 0.f};
 
   int x, y;
-  auto &tf = cam->entity->GetReg()->get<Transform>(cam->entity->GetID());
   EngineRender::GetWindowSize(x, y);
-  return tf.position + instance.mousePos - Vec2((float)x, (float)y) / 2.f;
+  return tf->position + instance.mousePos - Vec2((float)x, (float)y) / 2.f;
 }
 
 unsigned char EngineInput::GetKey(KeyCode key) {
@@ -66,12 +67,12 @@ unsigned char EngineInput::GetKey(KeyCode key) {
     return glfwGetKey(window, GLFW_KEY_Q);
   case EngineInput::KeyCode::E:
     return glfwGetKey(window, GLFW_KEY_E);
-  case EngineInput::KeyCode::Mouse1:
-    return glfwGetKey(window, GLFW_MOUSE_BUTTON_1);
-  case EngineInput::KeyCode::Mouse2:
-    return glfwGetKey(window, GLFW_MOUSE_BUTTON_2);
-  case EngineInput::KeyCode::Mouse3:
-    return glfwGetKey(window, GLFW_MOUSE_BUTTON_3);
+  case EngineInput::KeyCode::Left:
+    return glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+  case EngineInput::KeyCode::Right:
+    return glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
+  case EngineInput::KeyCode::Middle:
+    return glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE);
   default:
     return 0;
   }

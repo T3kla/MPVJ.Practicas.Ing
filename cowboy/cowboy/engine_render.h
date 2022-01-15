@@ -1,9 +1,11 @@
 #pragma once
 
-#include "camera.h"
 #include "color.h"
 #include "glfw3.h"
 #include <vector>
+
+struct Transform;
+struct Camera;
 
 class EngineRender {
   friend class Engine;
@@ -48,5 +50,5 @@ public:
   static const bool GetTitleUpdate();
   static void SetTitleUpdate(bool value);
 
-  static const Camera *GetMainCamera();
+  static const void GetMainCamera(Transform *&transform, Camera *&camera);
 };

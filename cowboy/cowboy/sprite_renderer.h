@@ -3,11 +3,9 @@
 #include "litegfx.h"
 #include "vec.h"
 
-class Entity;
 struct Sprite;
 
 struct SpriteRenderer {
-  Entity *entity = nullptr;
   bool enable = true;
 
   Sprite *sprite = nullptr;

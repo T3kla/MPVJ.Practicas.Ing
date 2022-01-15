@@ -6,19 +6,7 @@ class EngineInput {
   friend class Engine;
 
 public:
-  enum class KeyCode {
-    None,
-    Default,
-    W,
-    A,
-    S,
-    D,
-    Q,
-    E,
-    Mouse1,
-    Mouse2,
-    Mouse3
-  };
+  enum class KeyCode { None, Default, W, A, S, D, Q, E, Left, Right, Middle };
 
 private:                                     // SINGLETON
   EngineInput();                             //

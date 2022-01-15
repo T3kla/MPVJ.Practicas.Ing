@@ -1,4 +1,5 @@
 #include "engine_render.h"
+#include "camera.h"
 #include "engine.h"
 #include "entity.h"
 #include "litegfx.h"
@@ -135,12 +136,12 @@ void EngineRender::SetTitle(char *text) {
 const bool EngineRender::GetTitleUpdate() { return instance.titleUpdate; }
 void EngineRender::SetTitleUpdate(bool value) { instance.titleUpdate = value; }
 
-const Camera *EngineRender::GetMainCamera() {
+const void EngineRender::GetMainCamera(Transform *&transform, Camera *&camera) {
   auto cams = Engine::GetRegistry().view<Transform, Camera>();
 
   for (auto [entity, tf, cm] : cams.each())
-    if (cm.main)
-      return &cm;
-
-  return nullptr;
+    if (cm.main) {
+      transform = &tf;
+      camera = &cm;
+    }
 }

@@ -1,16 +1,13 @@
 #pragma once
 
-class Entity;
-
 struct Player {
-  Entity *entity = nullptr;
   bool enable = true;
 
   // Movement
-  float maxSpeed = 200.f;
-  float acceleration = 200.f;
+  float maxSpeed = 0.f;
+  float acceleration = 0.f;
 
   // Shooting
-  float shootRate = 0.5f;
+  float shootRate = 0.f;
   float shootCD = 0.f;
 };

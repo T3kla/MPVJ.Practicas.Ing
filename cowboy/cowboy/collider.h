@@ -2,11 +2,9 @@
 
 #include "vec.h"
 
-class Entity;
 class CollisionBehaviour;
 
 struct Collider {
-  Entity *entity = nullptr;
   bool enable = true;
 
   enum class Type { None, Default, Square, Circle };

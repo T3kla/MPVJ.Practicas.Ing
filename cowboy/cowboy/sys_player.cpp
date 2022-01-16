@@ -1,6 +1,7 @@
 #include "sys_player.h"
 
 #include "bullet.h"
+#include "camera.h"
 #include "engine.h"
 #include "engine_game.h"
 #include "engine_input.h"
@@ -8,22 +9,30 @@
 #include "gameobject.h"
 #include "player.h"
 #include "rigidbody.h"
+#include "sprite_loader.h"
+#include "sprite_renderer.h"
 #include "stasis.h"
+#include "sys_bullet.h"
 #include "transform.h"
 #include "vec.h"
 
-Transform *tf = nullptr;
-Rigidbody *rb = nullptr;
-Player *pl = nullptr;
+#include "scene.h"
+
+static entt::entity playerID = {};
+static Transform *tf = nullptr;
+static Rigidbody *rb = nullptr;
+static Player *pl = nullptr;
+static double shootCoolDown = 0.f;
 
 bool SearchForPlayer() {
-  auto players = Engine::GetRegistry().view<Transform, Rigidbody, Player>();
-  for (auto [entity, tf0, rb0, pl0] : players.each()) {
-    tf = &tf0;
-    rb = &rb0;
-    pl = &pl0;
-    break;
-  }
+  auto &reg = Engine::GetRegistry();
+
+  playerID = reg.view<Player>().front();
+
+  tf = &reg.get<Transform>(playerID);
+  rb = &reg.get<Rigidbody>(playerID);
+  pl = &reg.get<Player>(playerID);
+
   return pl != 0 ? true : false;
 }
 
@@ -42,15 +51,20 @@ void SysPlayer::Update() {
   auto ang = (EngineInput::GetMousePosInWorld() - tf->position).AngleDeg();
   tf->rotation = ang;
 
-  // Shooting TODO: shoot
-  if (EngineInput::GetKey(EngineInput::KeyCode::Left)) {
-    entt::entity bullet;
+  // Shooting
+  shootCoolDown -= Stasis::GetDeltaScaled() * 0.001f;
+  if (shootCoolDown < 0.f && EngineInput::GetKey(EngineInput::KeyCode::Left)) {
+    for (int i = -3; i <= 3; i++) {
+      auto id = SysBullet::InstantiateBullet();
 
-    auto bullets = Engine::GetRegistry().view<GameObject, Bullet>();
-    for (auto [entity, go, bl] : bullets.each()) {
-      if (!go.isActive)
-        bullet = entity;
-      break;
+      auto &reg = Engine::GetRegistry();
+
+      auto speed = reg.get<Bullet>(id).speed;
+      reg.get<Transform>(id).position = tf->position;
+      reg.get<Rigidbody>(id).velocity =
+          Vec2::AngleToVector(tf->rotation + 90 + 4 * i) * speed;
+
+      shootCoolDown = pl->shootCD;
     }
   }
 }
@@ -80,3 +94,25 @@ void SysPlayer::Fixed() {
 }
 
 void SysPlayer::Quit() {}
+
+entt::entity SysPlayer::GetPlayer() {
+  SearchForPlayer();
+  return playerID;
+}
+
+entt::entity SysPlayer::InstantiatePlayer() {
+  auto &reg = Engine::GetRegistry();
+
+  const auto id = reg.create();
+
+  reg.emplace<Transform>(id, true, Vec2::Zero(), Vec2::One(), 0.f);
+  reg.emplace<GameObject>(id, true, true);
+  reg.emplace<Rigidbody>(id, true, Vec2::Zero(), 0.1f);
+  reg.emplace<Player>(id, true, 20, 400.f, 0.1f, 0.25f);
+  reg.emplace<SpriteRenderer>(id, true, &SpriteLoader::sprPlayer,
+                              Vec2(0.f, 0.f), -90.f, Vec2(100.f, 100.f),
+                              Vec2(0.5f, 0.5f), 1, BLEND_ALPHA);
+  reg.emplace<Camera>(id, true, true, 1.f);
+
+  return id;
+}

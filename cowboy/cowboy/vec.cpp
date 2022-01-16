@@ -134,6 +134,10 @@ float Vec2::Angle(const Vec2 &a, const Vec2 &b) {
   return std::atan2f(b.y, b.x) - std::atan2f(a.y, a.x);
 }
 
+Vec2 Vec2::AngleToVector(const float &angle) {
+  return Vec2(sinf((float)ToRad(angle)), cosf((float)ToRad(angle)));
+}
+
 float Vec2::Distance(const Vec2 &a, const Vec2 &b) {
   return (b - a).Magnitude();
 }

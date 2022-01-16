@@ -1,10 +1,9 @@
 #pragma once
 
-#include "vec.h"
-
-struct Bullet {
+struct Enemy {
   bool enable = true;
 
-  float speed = 0.f;
+  int health = 0;
   int damage = 0;
+  float maxSpeed = 0.f;
 };

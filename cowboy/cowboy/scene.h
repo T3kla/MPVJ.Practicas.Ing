@@ -1,8 +1,9 @@
 #pragma once
 
+#include <entt/entt.hpp>
+
 #include "behaviour.h"
 #include "entity.h"
-#include <entt/entt.hpp>
 
 class Scene : public Behaviour {
 private:
@@ -17,4 +18,6 @@ public:
   virtual void Update() override;
   virtual void Fixed() override;
   virtual void Quit() override;
+
+  static void InstantiateFloor();
 };

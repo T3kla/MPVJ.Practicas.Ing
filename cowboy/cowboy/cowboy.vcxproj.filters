@@ -183,5 +183,8 @@
     <ClInclude Include="player.h">
       <Filter>Source Files\ECS\Components</Filter>
     </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

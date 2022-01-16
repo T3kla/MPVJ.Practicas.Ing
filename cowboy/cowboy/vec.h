@@ -40,6 +40,7 @@ struct Vec2 {
   static float Dot(const Vec2 &a, const Vec2 &b);
   static Vec2 Hadamard(const Vec2 &a, const Vec2 &b);
   static float Angle(const Vec2 &a, const Vec2 &b);
+  static Vec2 AngleToVector(const float &angle);
   static float Distance(const Vec2 &a, const Vec2 &b);
   static Vec2 RotateAround(const float &angle, const Vec2 &a,
                            const Vec2 &axis = Vec2::Zero());

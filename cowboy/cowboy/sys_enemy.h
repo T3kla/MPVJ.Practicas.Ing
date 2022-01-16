@@ -1,6 +1,7 @@
 #pragma once
 
 #include "behaviour.h"
+#include <entt/entt.hpp>
 
 struct SysEnemy : public Behaviour {
   SysEnemy();
@@ -11,4 +12,6 @@ struct SysEnemy : public Behaviour {
   virtual void Update() override;
   virtual void Fixed() override;
   virtual void Quit() override;
+
+  static entt::entity InstantiateEnemy();
 };

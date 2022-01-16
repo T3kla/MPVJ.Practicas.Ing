@@ -2,6 +2,7 @@
 #include "camera.h"
 #include "engine.h"
 #include "entity.h"
+#include "gameobject.h"
 #include "litegfx.h"
 #include "oval_renderer.h"
 #include "rect_renderer.h"
@@ -51,15 +52,20 @@ void EngineRender::Fixed() {
   lgfx_clearcolorbuffer(instance.bgColor.r, instance.bgColor.g,
                         instance.bgColor.b);
 
+  auto &reg = Engine::GetRegistry();
+
   // Camera settings
   Vec2 camPos = {-instance.windowWidth / 2.f, -instance.windowHeight / 2.f};
   float camHeight = 1.f;
-  auto cams = Engine::GetRegistry().view<Transform, Camera>();
-  for (auto [entity, tf, cm] : cams.each())
+  auto cams = reg.view<Transform, GameObject, Camera>();
+  for (auto [entity, tf, go, cm] : cams.each()) {
+    if (!go.isActive)
+      continue;
     if (cm.main) {
       camPos += tf.position;
       camHeight = cm.height;
     }
+  }
 
   auto CamTreatment = [&](Vec2 &pos, Vec2 &scl) {
     pos /= camHeight;
@@ -68,8 +74,10 @@ void EngineRender::Fixed() {
   };
 
   // Render Rects
-  auto rects = Engine::GetRegistry().view<Transform, RectRenderer>();
-  for (auto [entity, tf, rr] : rects.each()) {
+  auto rects = reg.view<Transform, GameObject, RectRenderer>();
+  for (auto [entity, tf, go, rr] : rects.each()) {
+    if (!go.isActive)
+      continue;
     lgfx_setcolor(rr.color.r, rr.color.g, rr.color.b, rr.color.a);
     Vec2 fPos = tf.position + rr.offsetPosition;
     Vec2 fScl = tf.scale + rr.offsetScale;
@@ -78,8 +86,10 @@ void EngineRender::Fixed() {
   }
 
   // Render Ovals
-  auto ovals = Engine::GetRegistry().view<Transform, OvalRenderer>();
-  for (auto [entity, tf, rr] : ovals.each()) {
+  auto ovals = reg.view<Transform, GameObject, OvalRenderer>();
+  for (auto [entity, tf, go, rr] : ovals.each()) {
+    if (!go.isActive)
+      continue;
     lgfx_setcolor(rr.color.r, rr.color.g, rr.color.b, rr.color.a);
     Vec2 fPos = tf.position + rr.offsetPosition;
     Vec2 fScl = tf.scale + rr.offsetScale;
@@ -89,8 +99,19 @@ void EngineRender::Fixed() {
 
   // Render Sprites
   lgfx_setcolor(1.f, 1.f, 1.f, 1.f);
-  auto sprites = Engine::GetRegistry().view<Transform, SpriteRenderer>();
-  for (auto [entity, tf, sr] : sprites.each()) {
+
+  const auto ByLayer = [](const SpriteRenderer &a, const SpriteRenderer &b) {
+    return a.layer < b.layer;
+  };
+
+  reg.sort<SpriteRenderer>(ByLayer);
+
+  auto sprites =
+      reg.view<Transform, GameObject, SpriteRenderer>().use<SpriteRenderer>();
+
+  for (auto [entity, tf, go, sr] : sprites.each()) {
+    if (!go.isActive)
+      continue;
     if (!sr.sprite)
       continue;
     Vec2 fPos = tf.position + sr.offsetPosition;
@@ -137,11 +158,14 @@ const bool EngineRender::GetTitleUpdate() { return instance.titleUpdate; }
 void EngineRender::SetTitleUpdate(bool value) { instance.titleUpdate = value; }
 
 const void EngineRender::GetMainCamera(Transform *&transform, Camera *&camera) {
-  auto cams = Engine::GetRegistry().view<Transform, Camera>();
+  auto cams = Engine::GetRegistry().view<Transform, GameObject, Camera>();
 
-  for (auto [entity, tf, cm] : cams.each())
+  for (auto [entity, tf, go, cm] : cams.each()) {
+    if (!go.isActive)
+      continue;
     if (cm.main) {
       transform = &tf;
       camera = &cm;
     }
+  }
 }

@@ -2,6 +2,7 @@
 
 #include "collider.h"
 #include "engine.h"
+#include "gameobject.h"
 #include "rigidbody.h"
 #include "stasis.h"
 #include "transform.h"
@@ -20,18 +21,23 @@ void SysPhysics::Update() {}
 
 void SysPhysics::Fixed() {
   // Movement
-  auto movers = Engine::GetRegistry().view<Transform, Rigidbody>();
+  auto movers = Engine::GetRegistry().view<Transform, GameObject, Rigidbody>();
 
-  for (auto [entity, tf, rb] : movers.each()) {
+  for (auto [entity, tf, go, rb] : movers.each()) {
+    if (!go.isActive)
+      continue;
     tf.position += rb.velocity * (float)STP * 0.001f;
     rb.velocity = rb.velocity * (1.f - rb.linearDamp);
   }
 
   // Collision
   auto collisioners =
-      Engine::GetRegistry().view<Transform, Rigidbody, Collider>();
+      Engine::GetRegistry().view<Transform, GameObject, Rigidbody, Collider>();
 
-  for (auto [entity, tf0, rb0, cl0] : collisioners.each()) {
+  for (auto [entity, tf0, go0, rb0, cl0] : collisioners.each()) {
+
+    if (!go0.isActive)
+      continue;
 
     auto xTop0 = tf0.position.x + cl0.size.x / 2.f;
     auto xBot0 = tf0.position.x - cl0.size.x / 2.f;
@@ -42,7 +48,10 @@ void SysPhysics::Fixed() {
       return v > t ? false : v < b ? false : true;
     };
 
-    for (auto [entity, tf1, rb1, cl1] : collisioners.each()) {
+    for (auto [entity, tf1, go1, rb1, cl1] : collisioners.each()) {
+
+      if (!go0.isActive)
+        continue;
 
       auto sqr = Collider::Type::Square;
       auto crl = Collider::Type::Square;

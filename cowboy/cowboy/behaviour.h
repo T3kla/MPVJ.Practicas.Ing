@@ -1,7 +1,5 @@
 #pragma once
 
-class Entity;
-
 struct Behaviour {
   Behaviour();
   virtual ~Behaviour();

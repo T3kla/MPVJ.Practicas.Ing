@@ -1,18 +1,17 @@
-#include "console.h"
-#include <conio.h>
-#include <windows.h>
+#include "Console.h"
+#include <Windows.h>
 
 namespace cls
 {
 
-void gotoxy(i16 x, i16 y)
+void GotoXY(int x, int y)
 {
-    COORD pos = {x, y};
+    COORD pos = {(short)x, (short)y};
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleCursorPosition(out, pos);
 }
 
-void clear()
+void Clear()
 {
     system("cls");
 }

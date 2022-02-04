@@ -9,9 +9,11 @@ class Logic
     void EntityLogic();
     void PlayerLogic();
     void BulletsPerSide(int &Left, int &Right);
+    void EnemySpawning();
 
   public:
     Logic(const Logic &) = delete;
 
+    static void Init();
     static void Run();
 };

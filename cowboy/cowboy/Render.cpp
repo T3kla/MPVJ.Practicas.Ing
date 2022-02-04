@@ -22,7 +22,7 @@ void Render::Run()
         std::cout << (i == 0 ? '[' : i == BOARD_SIZE ? ']' : '_');
 
     // Render Entities
-    for (int i = 0; i < REG_SIZE; i++)
+    for (int i = 0; i < REGISTRY_SIZE; i++)
     {
         if (!Registry[i].GetIsActive())
             continue;

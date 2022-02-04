@@ -14,14 +14,17 @@ Entity *Game::Player;
 void Game::Run()
 {
     // Registry Setup
-    Registry.resize(REG_SIZE);
-    for (int i = 0; i < REG_SIZE; i++)
+    Registry.resize(REGISTRY_SIZE);
+    for (int i = 0; i < REGISTRY_SIZE; i++)
         Registry[i] = Entity();
 
     // Player Setup
     Player = GetFreeEntity();
     Player->SetEntityType(E_EntityType::Player);
     Player->SetPosition(BOARD_SIZE / 2);
+
+    // Set random seed
+    Logic::Init();
 
     // Game Loop
     while (Input::GetInput() != KEY_ESC)
@@ -35,7 +38,7 @@ void Game::Run()
 
 Entity *Game::GetFreeEntity()
 {
-    for (int i = 0; i < REG_SIZE; i++)
+    for (int i = 0; i < REGISTRY_SIZE; i++)
         if (!Registry[i].GetIsActive())
         {
             auto *Entity = &Registry[i];

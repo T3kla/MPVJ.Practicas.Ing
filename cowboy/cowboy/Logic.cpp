@@ -1,5 +1,7 @@
 #include "Logic.h"
 
+#include <time.h>
+
 #include "Entity.h"
 #include "Game.h"
 #include "Input.h"
@@ -9,15 +11,20 @@ static auto CheckInBoard = [](int Pos) { return Pos > 1 && Pos < BOARD_SIZE - 1;
 
 Logic Logic::Instance;
 
+void Logic::Init()
+{
+    srand(time(0));
+}
+
 void Logic::Run()
 {
     // Don't update if player is dead
     if (!Game::GetPlayer()->GetIsActive())
         return;
 
-    // Player
     Instance.PlayerLogic();
     Instance.EntityLogic();
+    Instance.EnemySpawning();
 }
 
 void Logic::EntityLogic()
@@ -26,7 +33,7 @@ void Logic::EntityLogic()
     int Position = 0;
 
     // Enities movement
-    for (int i = 0; i < REG_SIZE; i++)
+    for (int i = 0; i < REGISTRY_SIZE; i++)
     {
         if (!Registry[i].GetIsActive() || Registry[i].GetEntityType() == E_EntityType::Player)
             continue;
@@ -40,9 +47,8 @@ void Logic::EntityLogic()
             continue;
         }
 
+        // Move by type
         auto Type = Registry[i].GetEntityType();
-
-        // Movement of enemies and bullets
         if (Type == E_EntityType::EnemyL)
             Registry[i].SetPosition(Position - 1);
         else if (Type == E_EntityType::EnemyR)
@@ -100,16 +106,21 @@ void Logic::BulletsPerSide(int &Left, int &Right)
     Left = 0;
     Right = 0;
 
-    for (int i = 0; i < REG_SIZE; i++)
+    for (int i = 0; i < REGISTRY_SIZE; i++)
     {
         auto Type = Registry[i].GetEntityType();
 
         if (!Registry[i].GetIsActive())
-            return;
+            continue;
 
         if (Type == E_EntityType::BulletL)
             Left++;
         else if (Type == E_EntityType::BulletR)
             Right++;
     }
+}
+
+void Logic::EnemySpawning()
+{
+    // Make
 }

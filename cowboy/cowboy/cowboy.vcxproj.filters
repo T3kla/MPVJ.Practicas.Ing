@@ -11,27 +11,60 @@
     <Filter Include="Resource Files\Enums">
       <UniqueIdentifier>{c3ef12a1-2a06-44a4-acde-5560fc4dafe7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Game">
+      <UniqueIdentifier>{1a3253f7-21ae-4196-a246-0c909b9026ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Game\Loops">
+      <UniqueIdentifier>{23f06632-d93a-44d3-990e-008be300f402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Console">
+      <UniqueIdentifier>{04e9e04a-ae4a-451a-8442-27ef7ffccb3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp">
       <Filter>Resource Files\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Console.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Resource Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Render.cpp">
+      <Filter>Resource Files\Game\Loops</Filter>
+    </ClCompile>
+    <ClCompile Include="Logic.cpp">
+      <Filter>Resource Files\Game\Loops</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Resource Files\Game\Loops</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>Resource Files\Console</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
       <Filter>Resource Files\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="Console.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="EEntityType.h">
       <Filter>Resource Files\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Resource Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Render.h">
+      <Filter>Resource Files\Game\Loops</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic.h">
+      <Filter>Resource Files\Game\Loops</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Resource Files\Game\Loops</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h">
+      <Filter>Resource Files\Console</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

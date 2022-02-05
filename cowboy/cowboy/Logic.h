@@ -6,10 +6,13 @@ class Logic
     Logic(){};
     static Logic Instance;
 
-    void EntityLogic();
     void PlayerLogic();
-    void BulletsPerSide(int &Left, int &Right);
+    void BulletMovement();
+    void Collisions();
+    void EnemyMovement();
     void EnemySpawning();
+
+    int EnemyMovementDelayCounter = 0;
 
   public:
     Logic(const Logic &) = delete;

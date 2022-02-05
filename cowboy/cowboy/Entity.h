@@ -5,7 +5,7 @@
 class Entity
 {
   public:
-    Entity(E_EntityType Type = E_EntityType::None, int Position = 0);
+    Entity(EEntityType Type = EEntityType::None, int Position = 0);
     ~Entity();
 
     bool GetIsActive();
@@ -14,11 +14,11 @@ class Entity
     int GetPosition();
     void SetPosition(int Value);
 
-    E_EntityType GetEntityType();
-    void SetEntityType(E_EntityType Value);
+    EEntityType GetEntityType();
+    void SetEntityType(EEntityType Value);
 
   private:
     bool Active = false;
     int Position = 0;
-    E_EntityType Type = E_EntityType::None;
+    EEntityType Type = EEntityType::None;
 };

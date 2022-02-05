@@ -14,8 +14,6 @@ static constexpr int BOARD_SIZE = 100;
 static constexpr int ENEMY_MOVEMENT_DELAY = 2;
 static constexpr int BULLETS_PER_SIDE = 5;
 
-static int Score = 0;
-
 class Entity;
 
 class Game
@@ -27,6 +25,8 @@ class Game
     static std::vector<Entity> Registry;
     static Entity *Player;
 
+    int Score = 0;
+
   public:
     Game(const Game &) = delete;
 
@@ -34,4 +34,7 @@ class Game
     static Entity *GetFreeEntity();
     static std::vector<Entity> &GetRegistry();
     static Entity *GetPlayer();
+
+    static int GetScore();
+    static void SetScore(int Value);
 };

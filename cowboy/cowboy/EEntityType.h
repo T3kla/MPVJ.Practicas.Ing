@@ -1,11 +1,13 @@
 #pragma once
 
-enum class E_EntityType : short
+enum class EEntityType : unsigned char
 {
     None,
     Player,
+    Enemy,
     EnemyL,
     EnemyR,
+    Bullet,
     BulletL,
     BulletR
 };

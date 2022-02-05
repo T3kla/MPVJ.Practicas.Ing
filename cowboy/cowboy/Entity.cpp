@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity(E_EntityType Type, int Position)
+Entity::Entity(EEntityType Type, int Position)
 {
     this->Active = false;
     this->Type = Type;
@@ -31,12 +31,12 @@ void Entity::SetPosition(int Value)
     Position = Value;
 }
 
-E_EntityType Entity::GetEntityType()
+EEntityType Entity::GetEntityType()
 {
     return Type;
 }
 
-void Entity::SetEntityType(E_EntityType Value)
+void Entity::SetEntityType(EEntityType Value)
 {
     this->Type = Value;
 }

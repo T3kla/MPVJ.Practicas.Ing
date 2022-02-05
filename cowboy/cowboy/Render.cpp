@@ -29,26 +29,26 @@ void Render::Run()
 
         auto Type = Registry[i].GetEntityType();
 
-        if (Type == E_EntityType::None)
+        if (Type == EEntityType::None)
             continue;
 
         cls::GotoXY(Registry[i].GetPosition(), 0);
 
-        if (Type == E_EntityType::Player)
+        if (Type == EEntityType::Player)
             std::cout << 'X';
-        else if (Type == E_EntityType::EnemyL)
-            std::cout << '}';
-        else if (Type == E_EntityType::EnemyR)
-            std::cout << '{';
-        else if (Type == E_EntityType::BulletL)
+        else if (Type == EEntityType::EnemyL)
+            std::cout << '*';
+        else if (Type == EEntityType::EnemyR)
+            std::cout << '*';
+        else if (Type == EEntityType::BulletL)
             std::cout << '<';
-        else if (Type == E_EntityType::BulletR)
+        else if (Type == EEntityType::BulletR)
             std::cout << '>';
     }
 
     // Render Score
     cls::GotoXY(BOARD_SIZE + 2, 0);
-    sprintf_s(CharBuffer, "%02d", Score);
+    sprintf_s(CharBuffer, "%02d", Game::GetScore());
     std::cout << CharBuffer;
 
     // Flush console buffer

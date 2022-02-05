@@ -43,6 +43,9 @@
     <ClCompile Include="Console.cpp">
       <Filter>Resource Files\Console</Filter>
     </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Resource Files\Game\Loops</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -65,6 +68,9 @@
     </ClInclude>
     <ClInclude Include="Console.h">
       <Filter>Resource Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Resource Files\Game\Loops</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -20,7 +20,7 @@ void Game::Run()
 
     // Player Setup
     Player = GetFreeEntity();
-    Player->SetEntityType(E_EntityType::Player);
+    Player->SetEntityType(EEntityType::Player);
     Player->SetPosition(BOARD_SIZE / 2);
 
     // Set random seed
@@ -56,4 +56,14 @@ std::vector<Entity> &Game::GetRegistry()
 Entity *Game::GetPlayer()
 {
     return Player;
+}
+
+int Game::GetScore()
+{
+    return Instance.Score;
+}
+
+void Game::SetScore(int Value)
+{
+    Instance.Score = Value;
 }

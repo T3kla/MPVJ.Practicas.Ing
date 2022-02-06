@@ -6,6 +6,7 @@
 #include "Input.h"
 #include "Logic.h"
 #include "Render.h"
+#include "Sound.h"
 
 Game Game::Instance;
 std::vector<Entity> Game::Registry;
@@ -25,6 +26,7 @@ void Game::Run()
 
     // Set random seed
     Logic::Init();
+    Sound::PlayMusic();
 
     // Game Loop
     while (Input::GetInput() != KEY_ESC)

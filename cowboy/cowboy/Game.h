@@ -11,6 +11,7 @@ static constexpr int KEY_ARROWRIGHT = 77;
 static constexpr int REGISTRY_SIZE = 20;
 static constexpr int BOARD_SIZE = 100;
 
+static constexpr int ENEMY_SIGHT = 10;
 static constexpr int ENEMY_MOVEMENT_DELAY = 2;
 static constexpr int BULLETS_PER_SIDE = 5;
 

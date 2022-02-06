@@ -31,6 +31,16 @@ void Entity::SetPosition(int Value)
     Position = Value;
 }
 
+bool Entity::GetReverse()
+{
+    return Reverse;
+}
+
+void Entity::SetReverse(bool Value)
+{
+    Reverse = Value;
+}
+
 EEntityType Entity::GetEntityType()
 {
     return Type;

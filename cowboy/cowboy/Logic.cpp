@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "Game.h"
 #include "Input.h"
+#include "Sound.h"
 
 static auto ClampToBoard = [](int Pos) { return Pos <= 0 ? 1 : Pos >= BOARD_SIZE ? BOARD_SIZE - 1 : Pos; };
 static auto CheckInBoard = [](int Pos) { return Pos > 0 && Pos < BOARD_SIZE; };
@@ -12,6 +13,7 @@ static auto RandomRange = [](int min, int max) { return rand() % (++max - min) +
 
 void BulletsPerSide(int &Left, int &Right);
 EEntityType ToLowerEnum(EEntityType Value);
+bool CheckForBullets(int Position, EEntityType EnemyType);
 
 Logic Logic::Instance;
 
@@ -62,6 +64,8 @@ void Logic::PlayerLogic()
     if (!Bullet)
         return;
 
+    Sound::PlayPlayerShoot();
+
     if (Input == KEY_ARROWLEFT && Left < BULLETS_PER_SIDE)
     {
         Bullet->SetPosition(Position - 1);
@@ -110,8 +114,6 @@ void Logic::Collisions()
 {
     auto &Registry = Game::GetRegistry();
 
-    // Looks like O(n^2) but:
-
     for (int i = 0; i < REGISTRY_SIZE; i++)
         for (int j = 0; j < REGISTRY_SIZE; j++)
         {
@@ -135,11 +137,14 @@ void Logic::Collisions()
             // Player - Enemy Collision
             if (EntityA_Type == EEntityType::Player && EntityB_Type == EEntityType::Enemy)
             {
+                Sound::PlayPlayerDeath();
                 EntityA.SetIsActive(false);
             }
             // Enemy - Bullet Collision
             else if (EntityA_Type == EEntityType::Enemy && EntityB_Type == EEntityType::Bullet)
             {
+                Sound::PlayEnemyDeath();
+
                 EntityA.SetIsActive(false);
                 EntityB.SetIsActive(false);
 
@@ -160,32 +165,35 @@ void Logic::EnemyMovement()
 
     for (int i = 0; i < REGISTRY_SIZE; i++)
     {
-        if (!Registry[i].GetIsActive())
+        auto &Entity = Registry[i];
+
+        if (!Entity.GetIsActive())
             continue;
 
-        auto Type = Registry[i].GetEntityType();
+        auto Type = Entity.GetEntityType();
 
-        if (Registry[i].GetEntityType() != EEntityType::EnemyL && Registry[i].GetEntityType() != EEntityType::EnemyR)
+        if (Entity.GetEntityType() != EEntityType::EnemyL && Entity.GetEntityType() != EEntityType::EnemyR)
             continue;
 
-        Position = Registry[i].GetPosition();
+        Position = Entity.GetPosition();
 
         // Deactivate if out of bounds
         if (!CheckInBoard(Position))
         {
-            Registry[i].SetIsActive(false);
+            Entity.SetIsActive(false);
             continue;
         }
 
-        // TODO: IA básica, mirar la bullet más cercana y huir
+        // Flee bullets
+        Entity.SetReverse(CheckForBullets(Position, Type));
 
         // Enemy Movement
         if (EnemyMovementDelayCounter == ENEMY_MOVEMENT_DELAY)
         {
             if (Type == EEntityType::EnemyL)
-                Registry[i].SetPosition(Position + 1);
+                Entity.SetPosition(Position + (Entity.GetReverse() ? -1 : 1));
             else if (Type == EEntityType::EnemyR)
-                Registry[i].SetPosition(Position - 1);
+                Entity.SetPosition(Position + (Entity.GetReverse() ? 1 : -1));
         }
     }
 }
@@ -247,4 +255,35 @@ EEntityType ToLowerEnum(EEntityType Value)
         return EEntityType::Enemy;
     else if (Value == EEntityType::EnemyR)
         return EEntityType::Enemy;
+    return EEntityType::None;
+}
+
+bool CheckForBullets(int Position, EEntityType EnemyType)
+{
+    auto &Registry = Game::GetRegistry();
+
+    for (int i = 0; i < REGISTRY_SIZE; i++)
+    {
+        auto &Entity = Registry[i];
+
+        if (!Entity.GetIsActive())
+            continue;
+
+        int Diff = 0;
+
+        if (Entity.GetEntityType() == EEntityType::BulletL && EnemyType == EEntityType::EnemyL)
+        {
+            Diff = Entity.GetPosition() - Position;
+            if (Diff > 0 && Diff <= ENEMY_SIGHT)
+                return true;
+        }
+        else if (Entity.GetEntityType() == EEntityType::BulletR && EnemyType == EEntityType::EnemyR)
+        {
+            Diff = Position - Entity.GetPosition();
+            if (Diff > 0 && Diff <= ENEMY_SIGHT)
+                return true;
+        }
+    }
+
+    return false;
 }

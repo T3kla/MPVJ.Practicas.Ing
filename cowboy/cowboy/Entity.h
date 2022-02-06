@@ -14,11 +14,15 @@ class Entity
     int GetPosition();
     void SetPosition(int Value);
 
+    bool GetReverse();
+    void SetReverse(bool Value);
+
     EEntityType GetEntityType();
     void SetEntityType(EEntityType Value);
 
   private:
     bool Active = false;
     int Position = 0;
+    bool Reverse = false;
     EEntityType Type = EEntityType::None;
 };
